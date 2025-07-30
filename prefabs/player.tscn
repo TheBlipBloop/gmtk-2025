@@ -1,18 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://w2nk42ky7lom"]
+[gd_scene load_steps=7 format=3 uid="uid://w2nk42ky7lom"]
 
 [ext_resource type="Script" uid="uid://b1ih08j57wy7u" path="res://scripts/ship_movement.gd" id="1_72ieh"]
 [ext_resource type="PackedScene" uid="uid://by646ofkr6ube" path="res://prefabs/player_graphics.tscn" id="2_4dohe"]
+[ext_resource type="Script" uid="uid://cht1jfjii2sdi" path="res://scripts/loop_detector.gd" id="3_r66lb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_72ieh"]
 
-[node name="Player" type="RigidBody3D"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r66lb"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.25
+
+[sub_resource type="QuadMesh" id="QuadMesh_r66lb"]
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("looper_component")]
 physics_interpolation_mode = 1
 can_sleep = false
 continuous_cd = true
 script = ExtResource("1_72ieh")
+base_rotation_speed = 10.0
+boost_rotation_speed = 5.0
+looper_component = NodePath("LoopDetector")
 metadata/_custom_type_script = "uid://b1ih08j57wy7u"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_72ieh")
 
 [node name="PlayerGraphics" parent="." instance=ExtResource("2_4dohe")]
+
+[node name="LoopDetector" type="Node" parent="."]
+script = ExtResource("3_r66lb")
+metadata/_custom_type_script = "uid://cht1jfjii2sdi"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1.5438e-08, -0.353181)
+amount = 256
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_r66lb")
+draw_pass_1 = SubResource("QuadMesh_r66lb")

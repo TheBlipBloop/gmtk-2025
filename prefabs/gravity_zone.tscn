@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b68wgr25h6fbd"]
+
+[ext_resource type="Script" uid="uid://e27wfflinw38" path="res://scripts/gravity.gd" id="1_m5rc2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5ew0c"]
+
+[node name="GravityZone" type="Area3D"]
+script = ExtResource("1_m5rc2")
+strength = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5ew0c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
