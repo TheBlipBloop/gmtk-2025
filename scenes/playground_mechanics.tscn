@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b45cq62d8qy71"]
+
+[ext_resource type="PackedScene" uid="uid://w2nk42ky7lom" path="res://prefabs/player.tscn" id="1_7jw03"]
+[ext_resource type="PackedScene" uid="uid://cssxlc3t7av3a" path="res://prefabs/camera.tscn" id="2_bixks"]
+
+[node name="PlaygroundMechanics" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_7jw03")]
+angular_damp = 1.0
+
+[node name="Camera" parent="." instance=ExtResource("2_bixks")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 15, 0)
