@@ -1,8 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cwvw3upanfc3j"]
-
-[ext_resource type="Shader" uid="uid://cq701pd1u43kd" path="res://shaders/pp_pixelate.gdshader" id="1_03jxs"]
-
-[resource]
-render_priority = 127
-shader = ExtResource("1_03jxs")
-shader_parameter/pixel_size = 5

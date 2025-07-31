@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb62hhg8gj7wb"]
+
+[ext_resource type="PackedScene" uid="uid://b8g7aaadtxynw" path="res://prefabs/level_ground.tscn" id="1_l5ymf"]
+[ext_resource type="PackedScene" uid="uid://cd80nyxr0flnu" path="res://prefabs/player.tscn" id="2_624wi"]
+[ext_resource type="PackedScene" uid="uid://co4a2xheavkr1" path="res://prefabs/camera.tscn" id="3_6018j"]
+
+[node name="Main-scene" type="Node3D"]
+
+[node name="LevelGround" parent="." instance=ExtResource("1_l5ymf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_624wi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74262, 0.76247, 0.554415)
+active_drag = 1.0
+
+[node name="Camera" parent="." instance=ExtResource("3_6018j")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 10, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.982535, -0.172145, 0.0706476, 0, 0.379666, 0.925124, -0.186078, -0.908966, 0.373035, 0, 0, 0)
+shadow_enabled = true
