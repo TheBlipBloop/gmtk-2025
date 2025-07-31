@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bihfuk31a5r77"]
+
+[ext_resource type="Script" uid="uid://bp8vr2ra128cx" path="res://scripts/label_mult.gd" id="1_8bix8"]
+[ext_resource type="Theme" uid="uid://cdinoags2mop8" path="res://ui_theme.tres" id="1_mhwow"]
+
+[sub_resource type="Gradient" id="Gradient_8bix8"]
+offsets = PackedFloat32Array(0, 2, 5)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 7
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+offset_right = 288.0
+grow_vertical = 0
+theme = ExtResource("1_mhwow")
+text = "asdsad"
+script = ExtResource("1_8bix8")
+colorRamp = SubResource("Gradient_8bix8")
