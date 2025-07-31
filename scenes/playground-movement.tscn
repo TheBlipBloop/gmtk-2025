@@ -19,7 +19,7 @@ active_drag = 1.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 10, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.982535, -0.172145, 0.0706476, 0, 0.379666, 0.925124, -0.186078, -0.908966, 0.373035, 0, 0, 0)
+transform = Transform3D(0.962798, -0.208708, -0.171641, 0.259961, 0.542016, 0.799149, -0.0737569, -0.814038, 0.576108, -0.0353438, -0.462823, -0.186623)
 shadow_enabled = true
 
 [node name="Game" type="Node" parent="."]

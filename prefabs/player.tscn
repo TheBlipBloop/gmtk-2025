@@ -16,6 +16,7 @@ height = 0.5
 script = ExtResource("1_4dohe")
 
 [node name="Graphics" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.278663, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
 mesh = SubResource("BoxMesh_fp3wc")

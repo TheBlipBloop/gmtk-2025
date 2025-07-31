@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode unshaded, fog_disabled;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear;
-uniform int pixel_size = 8;
+uniform int pixel_size = 4;
 
 
 void vertex() {
