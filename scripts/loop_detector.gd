@@ -26,3 +26,10 @@ func is_loop_complete(current_position: Vector2) -> bool:
 		if positions[i].distance_to(current_position) < threshold:
 			return true
 	return false
+	
+func get_loop_center() -> Vector2:
+	var total : Vector2 = Vector2.ZERO
+	for pos in positions:
+		total += pos 
+
+	return total / positions.size()
