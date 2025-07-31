@@ -8,6 +8,10 @@
 
 [node name="Player" parent="." instance=ExtResource("1_7jw03")]
 angular_damp = 1.0
+base_slow_down_speed = 0.2
+base_move_speed = 0.1
+boost_move_speed = 1.75
+loop_boost_speed = 3.5
 
 [node name="Camera" parent="." instance=ExtResource("2_bixks")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 15, 0)

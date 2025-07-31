@@ -58,8 +58,6 @@ func _process(delta: float) -> void:
 		
 		a.global_position = Vector3(center.x, 0.0, center.y)
 		
-		print(center)
-		
 		looper_component.reset_positions()
 		print("loop complete");
 		_boost()
