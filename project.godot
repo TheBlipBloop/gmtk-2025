@@ -43,6 +43,7 @@ thrust={
 3d_physics/layer_2="player"
 3d_physics/layer_3="demon"
 3d_physics/layer_4="health"
+3d_physics/layer_5="corpse"
 
 [physics]
 

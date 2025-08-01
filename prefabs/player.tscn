@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://y7jb5kcfevtk" path="res://prefabs/explosion_player_loop.tscn" id="2_g2jcq"]
 [ext_resource type="PackedScene" uid="uid://c8cv2hqu4o3gk" path="res://raw/car.blend" id="2_ht1c8"]
 [ext_resource type="Script" uid="uid://c1jwre71ajiib" path="res://scripts/hitbox.gd" id="2_r66lb"]
-[ext_resource type="Script" uid="uid://bdibrr7nu478a" path="res://scripts/health_component.gd" id="4_1txc5"]
+[ext_resource type="Script" uid="uid://c68llnna0q4rl" path="res://scripts/player_health_component.gd" id="6_g2jcq"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ht1c8"]
 gravity = Vector3(0, 0, 0)
@@ -119,5 +119,5 @@ threshold = 0.75
 metadata/_custom_type_script = "uid://cht1jfjii2sdi"
 
 [node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("4_1txc5")
+script = ExtResource("6_g2jcq")
 metadata/_custom_type_script = "uid://bdibrr7nu478a"

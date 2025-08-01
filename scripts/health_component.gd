@@ -22,6 +22,9 @@ func damage(amount: float):
 
 func heal(amount: float):
 	_change_health(amount)
+	
+func get_health() -> float:
+	return health
 
 func is_dead()->bool:
 	return health < 0.1

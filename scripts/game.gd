@@ -6,22 +6,28 @@ static var score = 0
 static var mult = 1
 static var kills = 0
 
+# hellish
 static var player_movement : CarMovement
+static var player_health : HealthComponent
 
 static func _reset():
 	score = 0
 	mult = 1
 	player_movement = null
 
-static func player_position():
+
+static func get_player_position():
 	if player_movement == null:
 		return Vector3.ZERO
 	return player_movement.global_position
 	
-static func player_position_extrapolated(in_seconds: float):		
+static func get_player_position_extrapolated(in_seconds: float):		
 	if player_movement == null:
 		return Vector3.ZERO
-	return player_position() + player_movement.velocity * in_seconds
+	return get_player_position() + player_movement.velocity * in_seconds
+
+static func get_player_health() -> HealthComponent:
+	return player_health
 
 static func notify_demon_death(base_points: float):
 	kills += 1

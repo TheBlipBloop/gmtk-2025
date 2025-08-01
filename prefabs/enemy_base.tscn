@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d68xmg1wfb77"]
+[gd_scene load_steps=10 format=3 uid="uid://d68xmg1wfb77"]
 
 [ext_resource type="Script" uid="uid://c7kfcbgo7xtgu" path="res://scripts/demon.gd" id="1_bhi8w"]
 [ext_resource type="Script" uid="uid://cstf6bd2r4d0d" path="res://scripts/enemy_movement_component.gd" id="1_i1yvi"]
+[ext_resource type="PackedScene" uid="uid://c7va312mchuf6" path="res://prefabs/corpse_base.tscn" id="2_h0akw"]
 [ext_resource type="Script" uid="uid://c1jwre71ajiib" path="res://scripts/hitbox.gd" id="2_ugkb8"]
 [ext_resource type="Script" uid="uid://qes0xov1bviv" path="res://scripts/spawner.gd" id="2_w1sji"]
 [ext_resource type="PackedScene" uid="uid://ccj5jllhrvt1t" path="res://prefabs/projectile.tscn" id="3_bhi8w"]
@@ -16,6 +17,7 @@ height = 0.75
 
 [node name="EnemyBase" type="RigidBody3D"]
 script = ExtResource("1_bhi8w")
+corpse = ExtResource("2_h0akw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245544, 0)

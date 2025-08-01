@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b5cpto1m4ewqp"]
+
+[ext_resource type="Texture2D" uid="uid://choaui10y3xt8" path="res://textures/circle.png" id="1_j7e7g"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.735697, 3.71569e-05, 0.132596, 1)
+albedo_texture = ExtResource("1_j7e7g")
+metallic = 0.2
+metallic_specular = 1.0

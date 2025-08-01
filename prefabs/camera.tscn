@@ -14,6 +14,7 @@ size = Vector2(2, 2)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 projection = 1
 size = 10.0
+near = 5.0
 far = 500.0
 script = ExtResource("1_70n02")
 
@@ -23,4 +24,3 @@ material_override = ExtResource("2_6p8hw")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_70n02")
 script = ExtResource("3_qwx7c")
-set_visible = false

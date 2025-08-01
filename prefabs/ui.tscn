@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bihfuk31a5r77"]
+[gd_scene load_steps=6 format=3 uid="uid://bihfuk31a5r77"]
 
 [ext_resource type="Script" uid="uid://bp8vr2ra128cx" path="res://scripts/label_mult.gd" id="1_8bix8"]
 [ext_resource type="Theme" uid="uid://cdinoags2mop8" path="res://ui_theme.tres" id="1_mhwow"]
 [ext_resource type="Script" uid="uid://bo2jojudvtb4b" path="res://scripts/label_score.gd" id="3_tok3d"]
+[ext_resource type="Script" uid="uid://ckmeuet8vlltx" path="res://scripts/label_health_tmp.gd" id="4_5n4f5"]
 
 [sub_resource type="Gradient" id="Gradient_8bix8"]
 offsets = PackedFloat32Array(0, 2, 5)
@@ -43,3 +44,16 @@ grow_vertical = 0
 theme = ExtResource("1_mhwow")
 text = "asdsad"
 script = ExtResource("3_tok3d")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -116.0
+offset_right = 288.0
+offset_bottom = -80.0
+grow_vertical = 0
+theme = ExtResource("1_mhwow")
+text = "asdsad"
+script = ExtResource("4_5n4f5")

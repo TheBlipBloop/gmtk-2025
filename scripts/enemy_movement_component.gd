@@ -14,11 +14,11 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if randf() < 0.02:
-		TEMP_projectile_spawmer.look_at(Game.player_position_extrapolated(0.5), Vector3.UP, true)
+		TEMP_projectile_spawmer.look_at(Game.get_player_position_extrapolated(0.5), Vector3.UP, true)
 		TEMP_projectile_spawmer.spawn()
 
 func move_to_player():
-	var dir = m_body.global_position.direction_to(Game.player_position())
+	var dir = m_body.global_position.direction_to(Game.get_player_position())
 	dir.y = 0
 	dir = dir.normalized()
 	m_body.linear_velocity = dir

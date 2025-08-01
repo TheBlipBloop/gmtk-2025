@@ -65,14 +65,12 @@ func _process(delta: float) -> void:
 	else:
 		
 		if Time.get_ticks_msec() - m_last_drift_time_ms > 300:
-			print("reset")
 			drift_particles.amount_ratio = 0
 			loop_component.reset_positions()
 		
 	if loop_component.is_loop_complete(global_position):
 		on_loop_complete(loop_component.get_loop_radius_and_center())
 		loop_component.reset_positions()
-		print("looped")
 		
 	if m_input_boost_right or m_input_boost_left:
 		if m_input_boost_right:
@@ -91,7 +89,7 @@ func deal_loop_damage(radius: float, center: Vector3):
 	var damage_source: Explosion = loop_damage_explosion.instantiate()
 	get_tree().current_scene.add_child(damage_source)
 	damage_source.global_position = center;
-	damage_source.global_scale(Vector3(radius, radius, radius) * 1.5)
+	damage_source.global_scale(Vector3(radius, radius, radius) * 2.0)
 	
 	var damage_scalar: float = maxf(1.0, m_drift_speed_boost / 5.0)
 	damage_source.apply_damage_scalar(damage_scalar)

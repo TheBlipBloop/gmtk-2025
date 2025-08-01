@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://colgfvns4xnyl"]
+
+[ext_resource type="Script" uid="uid://bcjed7ffeelpa" path="res://scripts/blood_puddle.gd" id="1_5tmki"]
+[ext_resource type="Material" uid="uid://b5cpto1m4ewqp" path="res://materials/m_blood_puddle.tres" id="1_p56ik"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_tsu17"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5tmki"]
+radius = 0.4
+
+[node name="BloodPuddle" type="Area3D" node_paths=PackedStringArray("puddle_graphics")]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_5tmki")
+puddle_graphics = NodePath("Graphics")
+
+[node name="Graphics" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+material_override = ExtResource("1_p56ik")
+mesh = SubResource("QuadMesh_tsu17")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Graphics"]
+remote_path = NodePath("../../CollisionShape3D")
+update_position = false
+update_rotation = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_5tmki")
+
+[connection signal="body_entered" from="." to="." method="on_player_overlap"]
