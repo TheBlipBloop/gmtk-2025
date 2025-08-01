@@ -39,3 +39,27 @@ func get_loop_center() -> Vector2:
 		total += pos 
 
 	return total / positions.size()
+	
+func get_loop_radius() -> float:
+	var max_distance_from_center = 0
+	var center = get_loop_center()
+	var dist: float = 0
+	for pos in positions:
+		dist = center.distance_squared_to(pos)
+		if (dist > max_distance_from_center):
+			max_distance_from_center = dist 
+	
+	return sqrt(max_distance_from_center)	
+	
+# Returns vector in format : (radius, center.x, center.y) because no fucking tuples :/
+# GDScript really is good if you like things that are bad
+func get_loop_radius_and_center() -> Vector3:
+	var max_distance_from_center = 0
+	var center = get_loop_center()
+	var dist: float = 0
+	for pos in positions:
+		dist = center.distance_squared_to(pos)
+		if (dist > max_distance_from_center):
+			max_distance_from_center = dist 
+	
+	return Vector3(sqrt(max_distance_from_center), center.x, center.y)

@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d68xmg1wfb77"]
+[gd_scene load_steps=9 format=3 uid="uid://d68xmg1wfb77"]
 
-[ext_resource type="Script" uid="uid://cstf6bd2r4d0d" path="res://scripts/enemy_movement.gd" id="1_i1yvi"]
+[ext_resource type="Script" uid="uid://c7kfcbgo7xtgu" path="res://scripts/demon.gd" id="1_bhi8w"]
+[ext_resource type="Script" uid="uid://cstf6bd2r4d0d" path="res://scripts/enemy_movement_component.gd" id="1_i1yvi"]
+[ext_resource type="Script" uid="uid://c1jwre71ajiib" path="res://scripts/hitbox.gd" id="2_ugkb8"]
 [ext_resource type="Script" uid="uid://qes0xov1bviv" path="res://scripts/spawner.gd" id="2_w1sji"]
 [ext_resource type="PackedScene" uid="uid://ccj5jllhrvt1t" path="res://prefabs/projectile.tscn" id="3_bhi8w"]
+[ext_resource type="Script" uid="uid://bdibrr7nu478a" path="res://scripts/health_component.gd" id="5_3s4vc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_01n8c"]
 radius = 0.25
@@ -12,10 +15,13 @@ radius = 0.2
 height = 0.75
 
 [node name="EnemyBase" type="RigidBody3D"]
+script = ExtResource("1_bhi8w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245544, 0)
 shape = SubResource("SphereShape3D_01n8c")
+script = ExtResource("2_ugkb8")
+health_component = NodePath("../HealthComponent")
 
 [node name="Graphics" type="Node3D" parent="."]
 
@@ -28,8 +34,16 @@ script = ExtResource("1_i1yvi")
 TEMP_projectile_spawmer = NodePath("../Spawner")
 metadata/_custom_type_script = "uid://cstf6bd2r4d0d"
 
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("5_3s4vc")
+max_health = 15
+health = 15
+metadata/_custom_type_script = "uid://bdibrr7nu478a"
+
 [node name="Spawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.320891, 0)
 script = ExtResource("2_w1sji")
 target = ExtResource("3_bhi8w")
 spawn_points = [NodePath(".")]
+
+[connection signal="on_death" from="HealthComponent" to="." method="_on_death"]
