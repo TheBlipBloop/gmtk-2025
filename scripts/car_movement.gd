@@ -91,7 +91,7 @@ func deal_loop_damage(radius: float, center: Vector3):
 	var damage_source: Explosion = loop_damage_explosion.instantiate()
 	get_tree().current_scene.add_child(damage_source)
 	damage_source.global_position = center;
-	damage_source.global_scale(Vector3(radius, radius, radius))
+	damage_source.global_scale(Vector3(radius, radius, radius) * 1.5)
 	
 	var damage_scalar: float = maxf(1.0, m_drift_speed_boost / 5.0)
 	damage_source.apply_damage_scalar(damage_scalar)
@@ -116,13 +116,19 @@ func _physics_process(delta: float) -> void:
 	# drift force
 	if is_drifting():
 		var force = max(acceleration, velocity.length())
-		velocity += basis.z * force * delta * m_drift_speed_boost;
-		m_drift_speed_boost += delta / 15.0 
+		velocity += basis.z * force * delta * m_drift_speed_boost * 0.5;
+		m_drift_speed_boost += delta / 5.0 
 	else:
 		m_drift_speed_boost = move_toward(m_drift_speed_boost, 1.1, delta)
+	
+	# cornering
+	if velocity.dot(basis.z) < 0.7 and m_input_accelerate:
+		var force = max(acceleration, velocity.length())
+		velocity += basis.z * force * delta * m_drift_speed_boost;
 		
+	
 	move_and_slide();
 
 func is_drifting():
 	#return velocity.dot(basis.z) < 0.7 and m_input_accelerate
-	return velocity.normalized().dot(basis.z) < 0.4 and m_input_accelerate
+	return velocity.normalized().dot(basis.z) < 0.45 and m_input_accelerate

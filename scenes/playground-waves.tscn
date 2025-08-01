@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://duv3dduagrxe5"]
+
+[ext_resource type="PackedScene" uid="uid://b8g7aaadtxynw" path="res://prefabs/level_ground.tscn" id="1_vl3tu"]
+[ext_resource type="PackedScene" uid="uid://cd80nyxr0flnu" path="res://prefabs/player.tscn" id="2_ra0an"]
+[ext_resource type="PackedScene" uid="uid://co4a2xheavkr1" path="res://prefabs/camera.tscn" id="3_6otaf"]
+[ext_resource type="Script" uid="uid://iocgt3m5u41p" path="res://scripts/game.gd" id="4_a1de1"]
+[ext_resource type="PackedScene" uid="uid://bihfuk31a5r77" path="res://prefabs/ui.tscn" id="5_43xqa"]
+[ext_resource type="PackedScene" uid="uid://d68xmg1wfb77" path="res://prefabs/enemy_base.tscn" id="6_fqx3q"]
+[ext_resource type="Script" uid="uid://5b52tlp37yc1" path="res://scripts/wave_spawner.gd" id="7_ra0an"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y81ig"]
+
+[node name="Main-scene" type="Node3D"]
+
+[node name="LevelGround" parent="." instance=ExtResource("1_vl3tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_ra0an")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74262, 0.160374, 0.554415)
+active_drag = 1.0
+
+[node name="Camera" parent="." instance=ExtResource("3_6otaf")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 10, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.962798, -0.208708, -0.171641, 0.259961, 0.542016, 0.799149, -0.0737569, -0.814038, 0.576108, -0.0353438, -0.462823, -0.186623)
+shadow_enabled = true
+
+[node name="Game" type="Node" parent="."]
+script = ExtResource("4_a1de1")
+metadata/_custom_type_script = "uid://iocgt3m5u41p"
+
+[node name="UI" parent="." instance=ExtResource("5_43xqa")]
+offset_left = -1.0
+offset_top = -7.0
+offset_right = -1.0
+offset_bottom = -7.0
+
+[node name="EnemyBase" parent="." instance=ExtResource("6_fqx3q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59644, 0.010287, 5.70122)
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_y81ig")
+target_position = Vector3(0, 0, 0)
+
+[node name="WaveSpawner" type="Node3D" parent="." node_paths=PackedStringArray("spawn_points")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35221, 0.882116, 0)
+script = ExtResource("7_ra0an")
+kills_to_activate = 1
+target = ExtResource("6_fqx3q")
+spawn_points = [NodePath("Node3D"), NodePath("Node3D2"), NodePath("Node3D3")]
+metadata/_custom_type_script = "uid://5b52tlp37yc1"
+
+[node name="Node3D" type="Node3D" parent="WaveSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.437649)
+
+[node name="Node3D2" type="Node3D" parent="WaveSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283772, 2.38419e-07, -0.237994)
+
+[node name="Node3D3" type="Node3D" parent="WaveSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.288751, 2.38419e-07, -0.521219)
+
+[node name="WaveSpawner" type="Node3D" parent="WaveSpawner" node_paths=PackedStringArray("spawn_points")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66279, 0.900236, -2.5669)
+script = ExtResource("7_ra0an")
+kills_to_activate = 3
+target = ExtResource("6_fqx3q")
+spawn_points = [NodePath("../Node3D"), NodePath("../Node3D2"), NodePath("../Node3D3")]
+metadata/_custom_type_script = "uid://5b52tlp37yc1"
+
+[node name="Node3D" type="Node3D" parent="WaveSpawner/WaveSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.437649)
+
+[node name="Node3D2" type="Node3D" parent="WaveSpawner/WaveSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283772, 2.38419e-07, -0.237994)
+
+[node name="Node3D3" type="Node3D" parent="WaveSpawner/WaveSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.288751, 2.38419e-07, -0.521219)

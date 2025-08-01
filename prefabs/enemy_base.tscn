@@ -40,7 +40,7 @@ max_health = 15
 health = 15
 metadata/_custom_type_script = "uid://bdibrr7nu478a"
 
-[node name="Spawner" type="Node3D" parent="."]
+[node name="Spawner" type="Node3D" parent="." node_paths=PackedStringArray("spawn_points")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.320891, 0)
 script = ExtResource("2_w1sji")
 target = ExtResource("3_bhi8w")
