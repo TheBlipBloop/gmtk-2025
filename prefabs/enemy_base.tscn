@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d68xmg1wfb77"]
+
+[ext_resource type="Script" uid="uid://cstf6bd2r4d0d" path="res://scripts/enemy_movement.gd" id="1_i1yvi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_01n8c"]
+radius = 0.25
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i1yvi"]
+radius = 0.2
+height = 0.75
+
+[node name="EnemyBase" type="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245544, 0)
+shape = SubResource("SphereShape3D_01n8c")
+
+[node name="Graphics" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364713, 0)
+mesh = SubResource("CapsuleMesh_i1yvi")
+
+[node name="EnemyMovement" type="Node" parent="."]
+script = ExtResource("1_i1yvi")
+metadata/_custom_type_script = "uid://cstf6bd2r4d0d"

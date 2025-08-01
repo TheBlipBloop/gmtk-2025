@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bb62hhg8gj7wb"]
+[gd_scene load_steps=7 format=3 uid="uid://bb62hhg8gj7wb"]
 
 [ext_resource type="PackedScene" uid="uid://b8g7aaadtxynw" path="res://prefabs/level_ground.tscn" id="1_l5ymf"]
 [ext_resource type="PackedScene" uid="uid://cd80nyxr0flnu" path="res://prefabs/player.tscn" id="2_624wi"]
 [ext_resource type="PackedScene" uid="uid://co4a2xheavkr1" path="res://prefabs/camera.tscn" id="3_6018j"]
 [ext_resource type="Script" uid="uid://iocgt3m5u41p" path="res://scripts/game.gd" id="4_ja6rq"]
 [ext_resource type="PackedScene" uid="uid://bihfuk31a5r77" path="res://prefabs/ui.tscn" id="5_gyvey"]
+[ext_resource type="PackedScene" uid="uid://d68xmg1wfb77" path="res://prefabs/enemy_base.tscn" id="6_y81ig"]
 
 [node name="Main-scene" type="Node3D"]
 
@@ -31,3 +32,15 @@ offset_left = -1.0
 offset_top = -7.0
 offset_right = -1.0
 offset_bottom = -7.0
+
+[node name="EnemyBase" parent="." instance=ExtResource("6_y81ig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59644, 0.010287, 5.70122)
+
+[node name="EnemyBase2" parent="." instance=ExtResource("6_y81ig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.259649, 0.010287, -1.09558)
+
+[node name="EnemyBase3" parent="." instance=ExtResource("6_y81ig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153078, 0.010287, 3.01196)
+
+[node name="EnemyBase4" parent="." instance=ExtResource("6_y81ig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56932, 0.010287, -1.42884)

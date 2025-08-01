@@ -17,6 +17,7 @@ far = 500.0
 script = ExtResource("1_70n02")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+visible = false
 material_override = ExtResource("2_6p8hw")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_70n02")
