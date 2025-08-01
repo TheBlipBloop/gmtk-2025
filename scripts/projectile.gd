@@ -3,6 +3,12 @@ class_name Projectile
 @export var raycast: RayCast3D
 @export var damage: float = 10
 @export var speed: float = 5
+@export var lifetime: float = 2.5
+
+var m_destroy_time: float = 0
+
+func _ready():
+	m_destroy_time = Time.get_ticks_msec() / 1000.0 + lifetime
 
 # TEMP TEM PTEMP POOLME LATER
 func _process(delta: float) -> void:
@@ -10,7 +16,7 @@ func _process(delta: float) -> void:
 
 func update_projectile(delta : float ) -> void:
 	var hit: bool = travel(delta)
-	if hit:
+	if hit or _lifetime_expired():
 		queue_free()
 	
 func travel(delta: float) -> bool:
@@ -32,6 +38,8 @@ func travel(delta: float) -> bool:
 		
 	return true
 
+func _lifetime_expired() -> bool:
+	return Time.get_ticks_msec() / 1000 >= m_destroy_time
 #func wake_from_pool(spawn_position: Vector3, spawn_direction: Vector3):
 	#global_position = spawn_position
 	#basis.z = spawn_direction

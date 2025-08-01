@@ -12,6 +12,8 @@ class_name CarMovement
 @export var active_drag = 2.0
 @export var drag = 5.0
 
+@export var drift_particles: GPUParticles3D
+
 @export var loop_damage_explosion: PackedScene
 
 var m_rotation : float  = 0.0
@@ -23,6 +25,7 @@ var m_input_boost_right : bool = false
 var m_input_boost_left : bool = false
 
 var m_input_mouse_position : Vector3 
+var m_last_drift_time_ms: int = -1000
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,9 +52,22 @@ func _process(delta: float) -> void:
 	_get_input()
 	
 	if m_input_accelerate:
-		loop_component.record_position(global_position)
+		pass
+		#loop_component.record_position(global_position)
 	else:
-		loop_component.reset_positions()
+		pass
+		#loop_component.reset_positions()
+		
+	if is_drifting():
+		m_last_drift_time_ms = Time.get_ticks_msec()
+		loop_component.record_position(global_position)
+		drift_particles.amount_ratio = 1
+	else:
+		
+		if Time.get_ticks_msec() - m_last_drift_time_ms > 300:
+			print("reset")
+			drift_particles.amount_ratio = 0
+			loop_component.reset_positions()
 		
 	if loop_component.is_loop_complete(global_position):
 		on_loop_complete(loop_component.get_loop_radius_and_center())
@@ -95,19 +111,18 @@ func _physics_process(delta: float) -> void:
 		rotation.y = lerp_angle(rotation.y, m_rotation, steer_speed * delta)
 	else:
 		velocity = velocity.move_toward(Vector3.ZERO, drag * delta)
-		rotation.y = lerp_angle(rotation.y, m_rotation, steer_speed * delta * 0.2)
+		rotation.y = lerp_angle(rotation.y, m_rotation, steer_speed * delta * 2)
 		
 	# drift force
-	if velocity.dot(basis.z) < 0.7 and m_input_accelerate:
+	if is_drifting():
 		var force = max(acceleration, velocity.length())
 		velocity += basis.z * force * delta * m_drift_speed_boost;
-		m_drift_speed_boost += delta
+		m_drift_speed_boost += delta / 15.0 
 	else:
 		m_drift_speed_boost = move_toward(m_drift_speed_boost, 1.1, delta)
 		
 	move_and_slide();
-	#if m_input_accelerate:
-		#apply_central_force(global_basis.z * acceleration * delta)
-		
-	#if abs(m_input_rotation) > 0.5 and linear_velocity.length() > min_turn_speed:
-		#angular_velocity += Vector3.UP * steer_speed * -m_input_rotation * delta
+
+func is_drifting():
+	#return velocity.dot(basis.z) < 0.7 and m_input_accelerate
+	return velocity.normalized().dot(basis.z) < 0.4 and m_input_accelerate
