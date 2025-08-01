@@ -13,7 +13,7 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_624wi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74262, 0.31967, 0.554415)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74262, 0.160374, 0.554415)
 active_drag = 1.0
 
 [node name="Camera" parent="." instance=ExtResource("3_6018j")]

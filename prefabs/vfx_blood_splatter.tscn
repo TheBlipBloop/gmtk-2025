@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://e0t0pmqjcguf"]
+
+[node name="VFXBloodSplatter" type="Node3D"]
+
+[node name="Splash" type="GPUParticles3D" parent="."]
+
+[node name="Puddle" type="GPUParticles3D" parent="."]
+visibility_aabb = AABB(-4, -0.5, -4, 8, 1, 8)

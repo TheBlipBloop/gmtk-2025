@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 class_name CarMovement
 
+@export var floor_height = 0.16;
+
 @export var loop_component : LoopDetector
 
 @export var acceleration = 5.0
@@ -47,7 +49,7 @@ func _process(delta: float) -> void:
 	
  
 func _physics_process(delta: float) -> void:
-	
+	global_position.y = floor_height
 	if m_input_accelerate:
 		velocity = velocity.move_toward(Vector3.ZERO, active_drag * delta)
 		velocity += global_basis.z * acceleration * delta
