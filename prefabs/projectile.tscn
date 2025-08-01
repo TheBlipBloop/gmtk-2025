@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccj5jllhrvt1t"]
+
+[ext_resource type="Script" uid="uid://dnylr00ssfacr" path="res://scripts/projectile.gd" id="1_s5n0i"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_086x2"]
+radius = 0.1
+height = 0.2
+
+[node name="Projectile" type="Node3D" node_paths=PackedStringArray("raycast")]
+script = ExtResource("1_s5n0i")
+raycast = NodePath("RayCast3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_086x2")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+enabled = false
+exclude_parent = false
+target_position = Vector3(0, 0, 0.245)
+hit_back_faces = false

@@ -1,35 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd80nyxr0flnu"]
+[gd_scene load_steps=8 format=3 uid="uid://cd80nyxr0flnu"]
 
 [ext_resource type="Script" uid="uid://drpnm8krb5vr2" path="res://scripts/car_movement.gd" id="1_4dohe"]
 [ext_resource type="Script" uid="uid://cht1jfjii2sdi" path="res://scripts/loop_detector.gd" id="2_4dohe"]
+[ext_resource type="PackedScene" uid="uid://c8cv2hqu4o3gk" path="res://raw/car.blend" id="2_ht1c8"]
+[ext_resource type="Script" uid="uid://c1jwre71ajiib" path="res://scripts/hitbox.gd" id="2_r66lb"]
+[ext_resource type="Script" uid="uid://bdibrr7nu478a" path="res://scripts/health_component.gd" id="4_1txc5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_fp3wc"]
 size = Vector3(0.65, 0.5, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_4dohe"]
-radius = 0.1
-height = 0.5
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_4dohe"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("loop_component")]
 script = ExtResource("1_4dohe")
+loop_component = NodePath("LoopDetector")
 
 [node name="Graphics" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.278663, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+visible = false
 mesh = SubResource("BoxMesh_fp3wc")
 
-[node name="Front" type="MeshInstance3D" parent="Graphics"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.962465)
-mesh = SubResource("SphereMesh_4dohe")
-skeleton = NodePath("../MeshInstance3D")
+[node name="car" parent="Graphics" instance=ExtResource("2_ht1c8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.207779, 0.431)
 
-[node name="Collision" type="CollisionShape3D" parent="."]
+[node name="Collision" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 transform = Transform3D(0.999998, 0.00174533, -7.62907e-11, 0, -4.37114e-08, -1, -0.00174533, 0.999998, -4.37113e-08, 0, 0, 0)
 shape = SubResource("SphereShape3D_4dohe")
+script = ExtResource("2_r66lb")
+health_component = NodePath("../HealthComponent")
 
 [node name="LoopDetector" type="Node" parent="."]
 script = ExtResource("2_4dohe")
 metadata/_custom_type_script = "uid://cht1jfjii2sdi"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_1txc5")
+metadata/_custom_type_script = "uid://bdibrr7nu478a"

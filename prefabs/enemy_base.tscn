@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d68xmg1wfb77"]
+[gd_scene load_steps=6 format=3 uid="uid://d68xmg1wfb77"]
 
 [ext_resource type="Script" uid="uid://cstf6bd2r4d0d" path="res://scripts/enemy_movement.gd" id="1_i1yvi"]
+[ext_resource type="Script" uid="uid://qes0xov1bviv" path="res://scripts/spawner.gd" id="2_w1sji"]
+[ext_resource type="PackedScene" uid="uid://ccj5jllhrvt1t" path="res://prefabs/projectile.tscn" id="3_bhi8w"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_01n8c"]
 radius = 0.25
@@ -21,6 +23,13 @@ shape = SubResource("SphereShape3D_01n8c")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364713, 0)
 mesh = SubResource("CapsuleMesh_i1yvi")
 
-[node name="EnemyMovement" type="Node" parent="."]
+[node name="EnemyMovement" type="Node" parent="." node_paths=PackedStringArray("TEMP_projectile_spawmer")]
 script = ExtResource("1_i1yvi")
+TEMP_projectile_spawmer = NodePath("../Spawner")
 metadata/_custom_type_script = "uid://cstf6bd2r4d0d"
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.320891, 0)
+script = ExtResource("2_w1sji")
+target = ExtResource("3_bhi8w")
+spawn_points = [NodePath(".")]

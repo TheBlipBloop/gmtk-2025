@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 class_name CarMovement
 
+@export var loop_component : LoopDetector
+
 @export var acceleration = 5.0
 @export var steer_speed = 5.0
 @export var min_turn_speed = 0.5
@@ -33,20 +35,29 @@ func _get_input():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_get_input()
+	
+	if m_input_accelerate:
+		loop_component.record_position(global_position)
+	else:
+		loop_component.reset_positions()
+		
+	if loop_component.is_loop_complete(global_position):
+		loop_component.reset_positions()
+		print("looped")
+	
  
 func _physics_process(delta: float) -> void:
-	
 	
 	if m_input_accelerate:
 		velocity = velocity.move_toward(Vector3.ZERO, active_drag * delta)
 		velocity += global_basis.z * acceleration * delta
 		rotation.y = lerp_angle(rotation.y, m_rotation, steer_speed * delta)
 	else:
-		velocity = velocity.move_toward(Vector3.ZERO, drag  * delta)
+		velocity = velocity.move_toward(Vector3.ZERO, drag * delta)
 		rotation.y = lerp_angle(rotation.y, m_rotation, steer_speed * delta * 0.2)
 		
 	# drift force
-	if velocity.dot(basis.z) < 0.65 and m_input_accelerate:
+	if velocity.dot(basis.z) < 0.7 and m_input_accelerate:
 		var force = max(acceleration, velocity.length())
 		velocity += basis.z * force * delta * m_drift_speed_boost;
 		m_drift_speed_boost += delta

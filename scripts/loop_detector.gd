@@ -5,25 +5,31 @@ extends Node
 class_name LoopDetector
 
 @export var min_distance : float = 0.5;
-@export var threshold : float = 0.5;
+@export var threshold : float = 1.5;
 
 var positions : Array = []; ## ! Arrays are actually lists -- its like python but dumber.
 
-func record_position(new_position: Vector2):
+func record_position(new_position: Vector3):
+	var position_flat: Vector2 = Vector2(new_position.x, new_position.z)
+	
 	if positions.size() == 0:
-		positions.append(new_position)
+		positions.append(position_flat)
 		return
 	
 	var last_position : Vector2 = positions[positions.size() - 1]
-	if last_position.distance_to(new_position) > min_distance:
-		positions.append(new_position)
+	if last_position.distance_to(position_flat) > min_distance:
+		positions.append(position_flat)
 	
 func reset_positions():
+	if positions.size() == 0:
+		return
 	positions.clear()
 	
-func is_loop_complete(current_position: Vector2) -> bool:
+func is_loop_complete(current_position: Vector3) -> bool:
+	var position_flat: Vector2 = Vector2(current_position.x, current_position.z)
+	
 	for i in range(positions.size() - 3):
-		if positions[i].distance_to(current_position) < threshold:
+		if positions[i].distance_to(position_flat) < threshold:
 			return true
 	return false
 	

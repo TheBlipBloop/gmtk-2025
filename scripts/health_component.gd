@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 	pass
 
 func damage(amount: float):
+	print(health)
 	_change_health(-amount)
 
 func heal(amount: float):
@@ -28,6 +29,7 @@ func is_dead()->bool:
 func _change_health(delta: float):
 	var prev_health = health
 	health = clamp(health + delta, 0.0, max_health)
+	
 	
 	var real_delta : float = health - prev_health
 	if (real_delta < 0):

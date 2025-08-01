@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://qt32ugjmuxxv"]
+
+[ext_resource type="PackedScene" uid="uid://c8cv2hqu4o3gk" path="res://raw/car.blend" id="1_bod6j"]
+
+[node name="car" instance=ExtResource("1_bod6j")]
+
+[node name="chasis" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.446874, 0, 0)
+
+[node name="wheel_fl" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304043, -0.0168853, -0.185083)
+
+[node name="wheel_bl" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231469, 0.00266508, -0.26)
+
+[node name="wheel_fr" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0.304043, -0.0168853, 0.182169)
+
+[node name="wheel_br" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, -0.231469, 0.00266508, 0.26)
