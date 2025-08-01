@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b65ql8e335t71"]
+
+[ext_resource type="PackedScene" uid="uid://dwcbm1grmqfvj" path="res://raw/terrian_menu.blend" id="1_m3455"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3455"]
+albedo_color = Color(0.140832, 0.288673, 0.14084, 1)
+
+[node name="terrian_menu" instance=ExtResource("1_m3455")]
+
+[node name="Plane" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_m3455")

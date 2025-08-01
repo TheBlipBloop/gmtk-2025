@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3iuexcw5brp3"]
+
+[ext_resource type="PackedScene" uid="uid://co4a2xheavkr1" path="res://prefabs/camera.tscn" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://qt32ugjmuxxv" path="res://meshes/mesh_car.tscn" id="2_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://b65ql8e335t71" path="res://meshes/terrian_menu.tscn" id="2_ekxnf"]
+
+[node name="MainMenu" type="Node3D"]
+
+[node name="Camera" parent="." instance=ExtResource("1_l6cm7")]
+transform = Transform3D(0.920505, 0.276289, 0.276289, 0, 0.707107, -0.707107, -0.390731, 0.650895, 0.650895, -0.8692, 2.22455, -2.04771)
+
+[node name="Camera3D" parent="Camera" index="0"]
+transform = Transform3D(-1, 0, -5.96046e-08, 0, 1, -2.98023e-08, 5.96046e-08, 2.98023e-08, -1, -0.00256493, 0.00337221, 0.611096)
+size = 2.821
+
+[node name="terrian_menu2" parent="." instance=ExtResource("2_ekxnf")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.181163, 0.429037, -0.884933, 0.422013, 0.778851, 0.464, 0.888305, -0.457513, -0.0399598, 0, 0, 0)
+light_energy = 0.688
+shadow_enabled = true
+
+[node name="car" parent="." instance=ExtResource("2_bqqt6")]
+transform = Transform3D(0.554631, -0.705011, 0.441978, 0.820299, 0.552386, -0.148254, -0.139622, 0.44478, 0.88469, 0.150764, -0.0724719, -0.68513)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.14722, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 18.7
+
+[node name="OmniLight3D" type="OmniLight3D" parent="OmniLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43193, -0.667817)
+light_color = Color(0.162132, 0.594233, 0.68203, 1)
+light_energy = 2.0
+
+[editable path="Camera"]
