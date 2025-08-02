@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://colgfvns4xnyl"]
+[gd_scene load_steps=7 format=3 uid="uid://colgfvns4xnyl"]
 
 [ext_resource type="Script" uid="uid://bcjed7ffeelpa" path="res://scripts/blood_puddle.gd" id="1_5tmki"]
-[ext_resource type="Material" uid="uid://b5cpto1m4ewqp" path="res://materials/m_blood_puddle.tres" id="1_p56ik"]
+[ext_resource type="Material" uid="uid://dk7obuf36mig3" path="res://materials/m_blood_puddle_0.tres" id="2_wf17n"]
+[ext_resource type="Material" uid="uid://dbbg3r4043l50" path="res://materials/m_blood_puddle_1.tres" id="3_wq6f2"]
+[ext_resource type="Material" uid="uid://ddmp24ab4bgo7" path="res://materials/m_blood_puddle_2.tres" id="4_35plf"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_tsu17"]
 
@@ -13,11 +15,12 @@ collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource("1_5tmki")
+material_pool = Array[Material]([ExtResource("2_wf17n"), ExtResource("3_wq6f2"), ExtResource("4_35plf")])
 puddle_graphics = NodePath("Graphics")
 
 [node name="Graphics" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-material_override = ExtResource("1_p56ik")
+material_override = ExtResource("2_wf17n")
 mesh = SubResource("QuadMesh_tsu17")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Graphics"]

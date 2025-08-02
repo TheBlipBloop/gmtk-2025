@@ -4,6 +4,7 @@
 extends CollisionObject3D
 class_name BloodPuddle
 
+@export var material_pool: Array[Material]
 
 @export var initial_size: float =  0.25
 @export var initial_size_jitter: float = 0.15
@@ -11,7 +12,7 @@ class_name BloodPuddle
 @export var final_size: float = 1.25
 @export var final_size_jitter: float = 0.75
 
-@export var spread_speed: float = 7
+@export var spread_speed: float = 8
 
 @export var heal_amount: float = 5.0
 @export var puddle_graphics: MeshInstance3D
@@ -23,6 +24,8 @@ var m_final_scale: float = 0;
 func _ready() -> void:
 	randomize_initial_scale();
 	randomize_final_scale();
+	puddle_graphics.material_override = Random.get_random_in_array(material_pool)
+	puddle_graphics.rotation.y =  Random.get_rng().randf_range(-180, 180)
 	puddle_graphics.scale = (Vector3.ONE * m_scale)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -66,9 +66,9 @@ func _process(delta: float) -> void:
 		on_loop_complete(loop_component.get_loop_radius_and_center())
 		loop_component.reset_positions()
 		
-	if m_input_flip:
+	if m_input_flip and abs((global_basis.inverse() * velocity).x) > 3:
 		m_input_flip = false
-		velocity = global_basis * ((global_basis.inverse() * velocity) * Vector3(-0.75, 1,1))
+		velocity = global_basis * ((global_basis.inverse() * velocity) * Vector3(-0.85, 1,1))
 		flip_audio.play_audio_randomized()
 	
 func on_loop_complete(loopinfo: Vector3):

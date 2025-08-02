@@ -11,6 +11,7 @@ shading_mode = 0
 albedo_color = Color(0, 1, 1, 0.458824)
 
 [sub_resource type="SphereMesh" id="SphereMesh_8sf4s"]
+height = 0.05
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u0v8b"]
 radius = 0.4

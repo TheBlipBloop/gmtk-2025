@@ -168,13 +168,12 @@ metadata/_custom_type_script = "uid://imhjmtnncy3j"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302979, 0)
 shape = SubResource("BoxShape3D_x0bak")
 
-[node name="EngineSound" type="AudioStreamPlayer3D" parent="." node_paths=PackedStringArray("drift_audio", "drift_start_audio", "drift_stop_audio")]
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="." node_paths=PackedStringArray("drift_audio", "drift_stop_audio")]
 stream = ExtResource("4_kbsxf")
 volume_db = 1.0
 autoplay = true
 script = ExtResource("5_kbsxf")
 drift_audio = NodePath("../BoostSound")
-drift_start_audio = NodePath("")
 drift_stop_audio = NodePath("../FlipSound")
 
 [node name="BoostSound" type="AudioStreamPlayer3D" parent="."]
@@ -186,7 +185,7 @@ autoplay = true
 stream = ExtResource("8_sd3sa")
 script = ExtResource("12_x0bak")
 pitch_max = 0.6
-pitch_min = 0.3
+pitch_min = 0.4
 
 [connection signal="on_healed" from="HealthComponent" to="HealthComponent/GainHealth" method="play_audio_randomized_1param"]
 [connection signal="body_entered" from="CollisionDetection" to="CollisionDetection/CollisionAudio" method="play_audio_randomized_1param"]
