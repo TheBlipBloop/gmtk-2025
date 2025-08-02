@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://duv3dduagrxe5"]
+[gd_scene load_steps=9 format=3 uid="uid://duv3dduagrxe5"]
 
 [ext_resource type="PackedScene" uid="uid://b8g7aaadtxynw" path="res://prefabs/level_ground.tscn" id="1_vl3tu"]
 [ext_resource type="PackedScene" uid="uid://cd80nyxr0flnu" path="res://prefabs/player.tscn" id="2_ra0an"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bihfuk31a5r77" path="res://prefabs/ui.tscn" id="5_43xqa"]
 [ext_resource type="PackedScene" uid="uid://d68xmg1wfb77" path="res://prefabs/enemy_base.tscn" id="6_fqx3q"]
 [ext_resource type="Script" uid="uid://5b52tlp37yc1" path="res://scripts/wave_spawner.gd" id="7_ra0an"]
-[ext_resource type="PackedScene" uid="uid://colgfvns4xnyl" path="res://prefabs/blood_puddle.tscn" id="8_6otaf"]
-[ext_resource type="PackedScene" uid="uid://c7va312mchuf6" path="res://prefabs/corpse_base.tscn" id="9_a1de1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y81ig"]
 
@@ -78,18 +76,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283772, 2.38419e-07, -0.237
 
 [node name="Node3D3" type="Node3D" parent="WaveSpawner/WaveSpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.288751, 2.38419e-07, -0.521219)
-
-[node name="BloodPuddle" parent="." instance=ExtResource("8_6otaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34457, 0.0329423, 2.81131)
-
-[node name="BloodPuddle2" parent="." instance=ExtResource("8_6otaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12932, 0.0329423, 1.06504)
-
-[node name="BloodPuddle3" parent="." instance=ExtResource("8_6otaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56498, 0.0329423, -0.326775)
-
-[node name="BloodPuddle4" parent="." instance=ExtResource("8_6otaf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.608, 0.0329423, 2.12423)
-
-[node name="CorpseBase" parent="." instance=ExtResource("9_a1de1")]
-transform = Transform3D(1, 0, 0, 0, 0.93464, 0.355596, 0, -0.355596, 0.93464, -1.00446, 1.76533, -0.721971)

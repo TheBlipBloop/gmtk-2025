@@ -2,6 +2,7 @@ extends Node3D
 class_name Projectile
 @export var raycast: RayCast3D
 @export var damage: float = 10
+@export var knockback: float = 2.0
 @export var speed: float = 5
 @export var lifetime: float = 2.5
 
@@ -20,7 +21,7 @@ func update_projectile(delta : float ) -> void:
 		queue_free()
 	
 func travel(delta: float) -> bool:
-	raycast.target_position = speed * delta * basis.z
+	raycast.target_position = speed * delta * Vector3.BACK
 	raycast.force_raycast_update()
 	
 	# no hit keep going
@@ -36,6 +37,9 @@ func travel(delta: float) -> bool:
 	if hitbox != null:
 		hitbox.health_component.damage(damage)
 		
+		## Awful check if we hit the player to do Knockback
+		if hitbox.health_component == Game.player_health:
+			Game.player_movement.apply_knockback(knockback * basis.z)
 	return true
 
 func _lifetime_expired() -> bool:

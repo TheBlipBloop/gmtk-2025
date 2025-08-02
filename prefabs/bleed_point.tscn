@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7ny00pyeuatb"]
+
+[ext_resource type="Script" uid="uid://c3bk6pgwerlnq" path="res://scripts/blood_source.gd" id="1_4gpx2"]
+[ext_resource type="PackedScene" uid="uid://colgfvns4xnyl" path="res://prefabs/blood_puddle.tscn" id="2_6thcb"]
+
+[node name="BleedPoint" type="RayCast3D"]
+enabled = false
+debug_shape_thickness = 5
+script = ExtResource("1_4gpx2")
+blood_prefab = ExtResource("2_6thcb")
+blood_height_offset = 0.01
+bleed_max = 6
+bleed_interval = 0.4
+min_move_distance = 0.5
+blood_cast_distance = 1.5
+positional_jitter = 0.75
+metadata/_custom_type_script = "uid://c3bk6pgwerlnq"

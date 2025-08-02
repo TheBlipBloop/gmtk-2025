@@ -9,6 +9,7 @@ height = 0.2
 [node name="Projectile" type="Node3D" node_paths=PackedStringArray("raycast")]
 script = ExtResource("1_s5n0i")
 raycast = NodePath("RayCast3D")
+damage = 30.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_086x2")

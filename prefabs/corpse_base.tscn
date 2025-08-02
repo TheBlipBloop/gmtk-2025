@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7va312mchuf6"]
+[gd_scene load_steps=5 format=3 uid="uid://c7va312mchuf6"]
 
-[ext_resource type="Script" uid="uid://c3bk6pgwerlnq" path="res://scripts/blood_source.gd" id="1_rb1em"]
-[ext_resource type="PackedScene" uid="uid://colgfvns4xnyl" path="res://prefabs/blood_puddle.tscn" id="2_co1i8"]
+[ext_resource type="PackedScene" uid="uid://b7ny00pyeuatb" path="res://prefabs/bleed_point.tscn" id="1_co1i8"]
 [ext_resource type="Script" uid="uid://dc6p5t87wyb1" path="res://scripts/destroy_parent.gd" id="3_wrqf5"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ji0u3"]
@@ -23,18 +22,9 @@ mesh = SubResource("CapsuleMesh_ji0u3")
 [node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ji0u3")
 
-[node name="BleedPoint" type="RayCast3D" parent="."]
+[node name="BleedPoint" parent="." instance=ExtResource("1_co1i8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195037, 0)
-enabled = false
-debug_shape_thickness = 5
-script = ExtResource("1_rb1em")
-blood_prefab = ExtResource("2_co1i8")
-blood_height_offset = 0.05
-bleed_interval = 0.4
-min_move_distance = 0.5
-blood_cast_distance = 1.5
-positional_jitter = 0.75
-metadata/_custom_type_script = "uid://c3bk6pgwerlnq"
+bleed_interval = 0.3
 
 [node name="DestroyParent" type="Node" parent="."]
 script = ExtResource("3_wrqf5")

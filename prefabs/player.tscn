@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cd80nyxr0flnu"]
+[gd_scene load_steps=15 format=3 uid="uid://cd80nyxr0flnu"]
 
 [ext_resource type="Script" uid="uid://drpnm8krb5vr2" path="res://scripts/car_movement.gd" id="1_4dohe"]
 [ext_resource type="Script" uid="uid://cht1jfjii2sdi" path="res://scripts/loop_detector.gd" id="2_4dohe"]
@@ -48,12 +48,16 @@ size = Vector2(0.25, 0.25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4dohe"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_g2jcq"]
+size = Vector3(0.587402, 0.972275, 0.523468)
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("loop_component", "drift_particles")]
 collision_layer = 2
 collision_mask = 13
 input_ray_pickable = false
 script = ExtResource("1_4dohe")
 loop_component = NodePath("LoopDetector")
+steer_speed = 6.0
 drift_particles = NodePath("Graphics/DriftParticle")
 loop_damage_explosion = ExtResource("2_g2jcq")
 
@@ -109,6 +113,12 @@ draw_pass_1 = SubResource("QuadMesh_u51tk")
 [node name="Collision" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 transform = Transform3D(0.999998, 0.00174533, -7.62907e-11, 0, -4.37114e-08, -1, -0.00174533, 0.999998, -4.37113e-08, 3.01718e-11, 0.395485, 1.72872e-08)
 shape = SubResource("SphereShape3D_4dohe")
+script = ExtResource("2_r66lb")
+health_component = NodePath("../HealthComponent")
+
+[node name="Collision2" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
+transform = Transform3D(0.999998, 0.00174533, -7.62907e-11, 0, -4.37114e-08, -1, -0.00174533, 0.999998, -4.37113e-08, -0.00807131, 0.285088, -0.00840113)
+shape = SubResource("BoxShape3D_g2jcq")
 script = ExtResource("2_r66lb")
 health_component = NodePath("../HealthComponent")
 

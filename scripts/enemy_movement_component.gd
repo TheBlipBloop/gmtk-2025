@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if randf() < 0.02:
-		TEMP_projectile_spawmer.look_at(Game.get_player_position_extrapolated(0.5), Vector3.UP, true)
+		TEMP_projectile_spawmer.look_at(Game.get_player_position_extrapolated(1), Vector3.UP, true)
 		TEMP_projectile_spawmer.spawn()
 
 func move_to_player():

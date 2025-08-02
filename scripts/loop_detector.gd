@@ -28,7 +28,7 @@ func reset_positions():
 func is_loop_complete(current_position: Vector3) -> bool:
 	var position_flat: Vector2 = Vector2(current_position.x, current_position.z)
 	
-	for i in range(positions.size() - 3):
+	for i in range(positions.size() / 3):
 		if positions[i].distance_to(position_flat) < threshold:
 			return true
 	return false
