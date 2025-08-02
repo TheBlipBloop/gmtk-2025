@@ -24,7 +24,9 @@ shape = SubResource("CapsuleShape3D_ji0u3")
 
 [node name="BleedPoint" parent="." instance=ExtResource("1_co1i8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195037, 0)
+bleed_max = 7
 bleed_interval = 0.3
+blood_cast_distance = 0.5
 
 [node name="DestroyParent" type="Node" parent="."]
 script = ExtResource("3_wrqf5")
