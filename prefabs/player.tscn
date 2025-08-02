@@ -1,11 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://cd80nyxr0flnu"]
+[gd_scene load_steps=25 format=3 uid="uid://cd80nyxr0flnu"]
 
 [ext_resource type="Script" uid="uid://drpnm8krb5vr2" path="res://scripts/car_movement.gd" id="1_4dohe"]
 [ext_resource type="Script" uid="uid://cht1jfjii2sdi" path="res://scripts/loop_detector.gd" id="2_4dohe"]
 [ext_resource type="PackedScene" uid="uid://y7jb5kcfevtk" path="res://prefabs/explosion_player_loop.tscn" id="2_g2jcq"]
 [ext_resource type="PackedScene" uid="uid://c8cv2hqu4o3gk" path="res://raw/car.blend" id="2_ht1c8"]
 [ext_resource type="Script" uid="uid://c1jwre71ajiib" path="res://scripts/hitbox.gd" id="2_r66lb"]
+[ext_resource type="AudioStream" uid="uid://f5gglo8e3qna" path="res://audio/sfx_engine_alt.ogg" id="4_kbsxf"]
+[ext_resource type="Script" uid="uid://b0p086lerbcu6" path="res://scripts/engine_audio_fx.gd" id="5_kbsxf"]
 [ext_resource type="Script" uid="uid://c68llnna0q4rl" path="res://scripts/player_health_component.gd" id="6_g2jcq"]
+[ext_resource type="AudioStream" uid="uid://y31fraqtrtpl" path="res://audio/sfx_drifting.ogg" id="6_rgeog"]
+[ext_resource type="AudioStream" uid="uid://b30mnvtt3ixma" path="res://audio/sfx_drift_stop.ogg" id="8_sd3sa"]
+[ext_resource type="Script" uid="uid://imhjmtnncy3j" path="res://scripts/randomized_audio_source.gd" id="12_x0bak"]
+[ext_resource type="AudioStream" uid="uid://bwmqgurd8eput" path="res://audio/sfx_wet_1.ogg" id="13_edtk3"]
+[ext_resource type="AudioStream" uid="uid://chg0sep1kulix" path="res://audio/sfx_impact_0.ogg" id="13_lulei"]
+[ext_resource type="AudioStream" uid="uid://daew8ugynfe5j" path="res://audio/sfx_impact_1.ogg" id="14_edtk3"]
+[ext_resource type="AudioStream" uid="uid://q4t5jpmou0mb" path="res://audio/sfx_impact_2.ogg" id="15_q2wkl"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ht1c8"]
 gravity = Vector3(0, 0, 0)
@@ -51,7 +60,10 @@ size = Vector2(0.25, 0.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_g2jcq"]
 size = Vector3(0.587402, 0.972275, 0.523468)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("loop_component", "drift_particles")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_x0bak"]
+size = Vector3(1, 0.394043, 1)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("loop_component", "drift_particles", "flip_audio")]
 collision_layer = 2
 collision_mask = 13
 input_ray_pickable = false
@@ -60,6 +72,7 @@ loop_component = NodePath("LoopDetector")
 steer_speed = 6.0
 drift_particles = NodePath("Graphics/DriftParticle")
 loop_damage_explosion = ExtResource("2_g2jcq")
+flip_audio = NodePath("FlipSound")
 
 [node name="Graphics" type="Node3D" parent="."]
 
@@ -131,3 +144,49 @@ metadata/_custom_type_script = "uid://cht1jfjii2sdi"
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("6_g2jcq")
 metadata/_custom_type_script = "uid://bdibrr7nu478a"
+
+[node name="GainHealth" type="AudioStreamPlayer3D" parent="HealthComponent"]
+script = ExtResource("12_x0bak")
+pitch_max = 1.9
+pitch_min = 1.5
+sound_pool = Array[AudioStream]([ExtResource("13_edtk3")])
+
+[node name="CollisionDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 20
+monitorable = false
+
+[node name="CollisionAudio" type="AudioStreamPlayer3D" parent="CollisionDetection"]
+max_polyphony = 3
+script = ExtResource("12_x0bak")
+pitch_max = 1.8
+pitch_min = 0.5
+sound_pool = Array[AudioStream]([ExtResource("13_lulei"), ExtResource("14_edtk3"), ExtResource("15_q2wkl")])
+metadata/_custom_type_script = "uid://imhjmtnncy3j"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302979, 0)
+shape = SubResource("BoxShape3D_x0bak")
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="." node_paths=PackedStringArray("drift_audio", "drift_start_audio", "drift_stop_audio")]
+stream = ExtResource("4_kbsxf")
+volume_db = 1.0
+autoplay = true
+script = ExtResource("5_kbsxf")
+drift_audio = NodePath("../BoostSound")
+drift_start_audio = NodePath("")
+drift_stop_audio = NodePath("../FlipSound")
+
+[node name="BoostSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_rgeog")
+volume_db = -80.0
+autoplay = true
+
+[node name="FlipSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_sd3sa")
+script = ExtResource("12_x0bak")
+pitch_max = 0.6
+pitch_min = 0.3
+
+[connection signal="on_healed" from="HealthComponent" to="HealthComponent/GainHealth" method="play_audio_randomized_1param"]
+[connection signal="body_entered" from="CollisionDetection" to="CollisionDetection/CollisionAudio" method="play_audio_randomized_1param"]

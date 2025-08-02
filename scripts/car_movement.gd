@@ -16,6 +16,9 @@ class_name CarMovement
 
 @export var loop_damage_explosion: PackedScene
 
+# MESSY BAD SORRY OOPS
+@export var flip_audio: RandomizedAudioPlayer3D
+
 var m_rotation : float  = 0.0
 var m_drift_speed_boost : float = 0
 
@@ -64,8 +67,9 @@ func _process(delta: float) -> void:
 		loop_component.reset_positions()
 		
 	if m_input_flip:
-			m_input_flip = false
-			velocity = global_basis * ((global_basis.inverse() * velocity) * Vector3(-0.75, 1,1))
+		m_input_flip = false
+		velocity = global_basis * ((global_basis.inverse() * velocity) * Vector3(-0.75, 1,1))
+		flip_audio.play_audio_randomized()
 	
 func on_loop_complete(loopinfo: Vector3):
 	var radius: float = loopinfo.x
@@ -107,6 +111,15 @@ func _physics_process(delta: float) -> void:
 
 func is_drifting():
 	return velocity.normalized().dot(basis.z) < 0.45 and m_input_accelerate
+
+# FOR AUDIO --- garbage code surely this will have no long term consequences
+func external_is_drift_valid():
+	if is_drifting(): 
+		return true
+	else:
+		if Time.get_ticks_msec() - m_last_drift_time_ms > 250 + (150 * m_drift_speed_boost):
+			return false
+		return true
 
 func apply_knockback(knockback: Vector3):
 	velocity += knockback

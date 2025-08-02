@@ -6,6 +6,7 @@ class_name HealthComponent
 @export var health = 100
 
 signal on_damaged
+signal on_healed
 signal on_death
 
 # Called when the node enters the scene tree for the first time.
@@ -20,8 +21,9 @@ func damage(amount: float):
 	print(health)
 	_change_health(-amount)
 
-func heal(amount: float):
-	_change_health(amount)
+func heal(amount: float) -> float: # returns health delta
+	return _change_health(amount)
+	
 	
 func get_health() -> float:
 	return health
@@ -37,5 +39,9 @@ func _change_health(delta: float):
 	var real_delta : float = health - prev_health
 	if (real_delta < 0):
 		on_damaged.emit(abs(real_delta))
+	if real_delta > 0:
+		on_healed.emit(real_delta)
 	if health == 0 and abs(delta) > 0.001:
 		on_death.emit()
+		
+	return real_delta

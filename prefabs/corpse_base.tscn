@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7va312mchuf6"]
+[gd_scene load_steps=9 format=3 uid="uid://c7va312mchuf6"]
 
 [ext_resource type="PackedScene" uid="uid://b7ny00pyeuatb" path="res://prefabs/bleed_point.tscn" id="1_co1i8"]
+[ext_resource type="AudioStream" uid="uid://bwmqgurd8eput" path="res://audio/sfx_wet_1.ogg" id="2_4tcu2"]
+[ext_resource type="Script" uid="uid://imhjmtnncy3j" path="res://scripts/randomized_audio_source.gd" id="3_1y01a"]
+[ext_resource type="AudioStream" uid="uid://dqpo3w0qqxkno" path="res://audio/sfx_demon_kill.wav" id="3_4tcu2"]
 [ext_resource type="Script" uid="uid://dc6p5t87wyb1" path="res://scripts/destroy_parent.gd" id="3_wrqf5"]
+[ext_resource type="AudioStream" uid="uid://bncytgnoybeo8" path="res://audio/sfx_wet_0.ogg" id="4_ilbv2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ji0u3"]
 radius = 0.2
@@ -28,7 +32,22 @@ bleed_max = 7
 bleed_interval = 0.3
 blood_cast_distance = 0.5
 
+[node name="BleedSound" type="AudioStreamPlayer3D" parent="BleedPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.195037, 0)
+stream = ExtResource("2_4tcu2")
+volume_db = -0.5
+script = ExtResource("3_1y01a")
+pitch_max = 1.5
+pitch_min = 0.7
+sound_pool = Array[AudioStream]([ExtResource("4_ilbv2"), ExtResource("2_4tcu2")])
+
 [node name="DestroyParent" type="Node" parent="."]
 script = ExtResource("3_wrqf5")
 delay = 15.0
 metadata/_custom_type_script = "uid://dc6p5t87wyb1"
+
+[node name="DeathSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_4tcu2")
+autoplay = true
+
+[connection signal="on_bleed_signal" from="BleedPoint" to="BleedPoint/BleedSound" method="play_audio_randomized"]

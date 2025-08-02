@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://y7jb5kcfevtk"]
+[gd_scene load_steps=8 format=3 uid="uid://y7jb5kcfevtk"]
 
 [ext_resource type="Script" uid="uid://bay6sgy3uto5g" path="res://scripts/explosion.gd" id="1_5v8mu"]
 [ext_resource type="Script" uid="uid://bclglgceaccav" path="res://scripts/damage_shape_cast.gd" id="2_8sf4s"]
 [ext_resource type="Script" uid="uid://dc6p5t87wyb1" path="res://scripts/destroy_parent.gd" id="3_u0v8b"]
+[ext_resource type="AudioStream" uid="uid://cj1cc1ji1jsyd" path="res://audio/sfx_explosion_large.ogg" id="4_fhl8n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5v8mu"]
 transparency = 1
@@ -16,6 +17,7 @@ radius = 0.4
 
 [node name="ExplosionPlayerLoop" type="Node3D" node_paths=PackedStringArray("damage_shape_cast")]
 script = ExtResource("1_5v8mu")
+damage_initial = 8.0
 damage_shape_cast = NodePath("DamageShapeCast3D")
 metadata/_custom_type_script = "uid://bay6sgy3uto5g"
 
@@ -34,5 +36,9 @@ metadata/_custom_type_script = "uid://bclglgceaccav"
 
 [node name="DestroyParent" type="Node" parent="."]
 script = ExtResource("3_u0v8b")
-delay = 0.1
+delay = 2.0
 metadata/_custom_type_script = "uid://dc6p5t87wyb1"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_fhl8n")
+autoplay = true

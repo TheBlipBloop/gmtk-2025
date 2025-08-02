@@ -43,7 +43,7 @@ func travel(delta: float) -> bool:
 	return true
 
 func _lifetime_expired() -> bool:
-	return Time.get_ticks_msec() / 1000 >= m_destroy_time
+	return Time.get_ticks_msec() / 1000.0 >= m_destroy_time
 #func wake_from_pool(spawn_position: Vector3, spawn_direction: Vector3):
 	#global_position = spawn_position
 	#basis.z = spawn_direction

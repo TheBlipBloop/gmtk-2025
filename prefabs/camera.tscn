@@ -25,3 +25,5 @@ extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_70n02")
 script = ExtResource("3_qwx7c")
 set_visible = false
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]

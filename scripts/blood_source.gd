@@ -11,6 +11,8 @@ class_name BleedPoint
 
 @export var positional_jitter = 0.4
 
+signal on_bleed_signal
+
 var m_last_bleed_tick_ms: int = 0
 var m_last_bleed_position: Vector3 = Vector3.ZERO
 var m_bleed_count: int = 0
@@ -44,5 +46,7 @@ func try_bleed() -> bool:
 	m_last_bleed_tick_ms = Time.get_ticks_msec()
 	m_last_bleed_position = global_position
 	m_bleed_count += 1
+	
+	on_bleed_signal.emit()
 	
 	return true

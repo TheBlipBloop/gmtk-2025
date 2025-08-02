@@ -31,8 +31,10 @@ func _process(delta: float) -> void:
 	puddle_graphics.scale = (Vector3.ONE * m_scale)
 	
 func on_player_overlap(_player: Node3D):
-	Game.player_health.heal(heal_amount)
-	queue_free()
+	var health_restored = Game.player_health.heal(heal_amount)
+	
+	if (health_restored > 0):
+		queue_free()
 
 func randomize_initial_scale():
 	m_scale = Random.get_rng().randf_range(initial_size - initial_size_jitter, initial_size + initial_size_jitter)
